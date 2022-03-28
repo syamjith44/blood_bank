@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+donate your blood save a soul
+{% endblock %}
+
+{% block body %}
+<div class="row ">
+    <div class="d-flex justify-content-center p-5">
+        <div class="">
+            <div class="card bg-light" style="width: 22rem;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h4 class="card-title text-dark">Thank You</h4>
+                        <p class="card-text text-dark">
+                            Thank you for your contribution, you have helped to save a life
+                        </p>
+                        <a class="btn btn-success" href="{% url 'myapp:home' %}">Go Home</a>
+                        <a class="btn btn-danger" href="{% url 'myapp:logout' %}">Log Out</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

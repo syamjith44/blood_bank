@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+register here to donate your blood
+{% endblock %}
+
+{% block body %}
+<section>
+    <div class="row">
+        <div class="d-flex justify-content-center p-5">
+            <div class="card bg-light" style="width:30rem;">
+                <div class="card-body">
+                    <h3 class="card-title text-primary">Registration Form</h3>
+                    <br>
+                    <p class="card-text text-danger">{{ form.non_field_errors }}</p>
+                    <form data-centers-url="{% url 'myapp:ajax_load_centers' %}" id="registration_form" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.first_name.id_for_label }}">First Name</label>
+                            {{ form.first_name }}{% if form.first_name.errors %}
+                            {% for error in form.first_name.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                            {% for error in form.last_name.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.email.id_for_label }}">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.mobile_number.id_for_label }}">Mobile Number</label>
+                            {{ form.mobile_number }}
+                            {% if form.mobile_number.errors %}
+                            {% for error in form.mobile_number.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.address_line_1.id_for_label }}">Address Line 1</label>
+                            {{ form.address_line_1 }}
+                            {% if form.address_line_1.errors %}
+                            {% for error in form.address_line_1.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.address_line_2.id_for_label }}">Address Line 2</label>
+                            {{ form.address_line_2 }}
+                            {% if form.address_line_2.errors %}
+                            {% for error in form.address_line_2.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.gender.id_for_label }}">Gender</label>
+                            {{ form.gender }}
+                            {% if form.gender.errors %}
+                            {% for error in form.gender.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.blood_group.id_for_label }}">Blood Group</label>
+                            {{ form.blood_group }}
+                            {% if form.blood_group.errors %}
+                            {% for error in form.blood_group.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.district.id_for_label }}">District</label>
+                            {{ form.district }}
+                            {% if form.district.errors %}
+                            {% for error in form.district.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group bg-light d-flex flex-column">
+                            <label class="text-dark" for="{{ form.center.id_for_label }}">Center</label>
+                            {{ form.center }}
+                            {% if form.center.errors %}
+                            {% for error in form.center.errors %}
+                            <h6 class="card-text text-danger">{{ error|escape }}</h6>
+                            {% endfor %}
+                            {% endif %}
+                        </div><br>
+                        <div class="form-group">
+                           <a ><button class="btn btn-primary" id="button" type="submit">Register</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_district").change(function () {
+      var url = $("#registration_form").attr("data-centers-url");
+      var districtId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'district': districtId
+        },
+        success: function (data) {
+          $("#id_center").html(data);
+        }
+      });
+
+    });
+
+</script>
+{% endblock %}

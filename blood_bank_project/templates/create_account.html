@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+donate your blood save a soul
+{% endblock %}
+
+{% block body %}
+<div class="row ">
+    <div class="d-flex justify-content-center p-5">
+        <div class="">
+            <div class="card bg-light" style="width: 22rem;">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">Create Account</h4>
+                    {% for message in messages %}
+                    <p class="card-text text-danger">{{message}}</p>
+                    {% endfor %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group bg-light">
+                            <label class="text-dark" for="username">Username</label>
+                            <input class="form-control" id="username" name="username" placeholder="enter a username"
+                                   type="text">
+                        </div>
+                        <div class="form-group bg-light">
+                            <label class="text-dark" for="email">Email</label>
+                            <input class="form-control" id="email" name="email" placeholder="enter your Email address"
+                                   type="email">
+                        </div>
+                        <div class="form-group bg-light">
+                            <label class="text-dark" for="password">Password</label>
+                            <input class="form-control" id="password" name="password" placeholder="enter a Password"
+                                   type="password">
+                        </div>
+                        <div class="form-group bg-light">
+                            <label class="text-dark" for="re_password">Confirm Password</label>
+                            <input class="form-control" id="re_password" name="re_password" placeholder="Confirm Your Password"
+                                   type="password">
+                        </div>
+                        <p class="card-text text-dark">
+                            Already a user? <a href="{% url 'myapp:login' %}" class="card-link" style="text-decoration:none;">Login Now</a>
+                        </p>
+                        <div class="form-group">
+                            <label for="button"> </label>
+                            <button class="btn btn-primary" id="button" type="submit">Create Account</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

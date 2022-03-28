@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+donate your blood save a soul
+{% endblock %}
+
+{% block body %}
+<!--total user count start-->
+<section class="p-5">
+    <div class="bg-light d-flex flex-row justify-content-center align-items-center">
+        <div>
+            <h4>A total of </h4>
+        </div>
+        <div class="p-1">
+            <h1> {{count}} </h1>
+        </div>
+        <div>
+            <h4>people are willing to donate blood</h4>
+        </div>
+        <div class="p-3">
+            <a href="{% if user.is_authenticated %}{% url 'myapp:register' %}{% else %}{% url 'myapp:login' %}{% endif %}">
+                <button class="btn btn-primary">Donate Now</button>
+            </a>
+        </div>
+    </div>
+</section>
+<!--total user count end-->
+<!--blood donation start-->
+<section class="p-5">
+    <div>
+        <h1>Why Donate Your Blood </h1><br>
+        <p>Transfusion of blood and blood products helps save millions of lives every year. It can help patients
+            suffering from life-threatening conditions live longer and with a higher quality of life, and supports
+            complex medical and surgical procedures. It also has an essential, life-saving role in maternal and child
+            care and during the emergency response to man-made and natural disasters.
+            <br>
+            A blood service that gives patients access to safe blood and blood products in sufficient quantity is a key
+            component of an effective health system. An adequate supply can only be ensured through regular donations by
+            voluntary, unpaid blood donors. However, in many countries, blood services face the challenge of making
+            sufficient blood available, while also ensuring its quality and safety.</p>
+    </div>
+</section>
+<!--blood donation end-->
+{% endblock %}
